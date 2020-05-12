@@ -26,6 +26,7 @@ namespace MoneyManagerApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddSwaggerDocument();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,6 +44,9 @@ namespace MoneyManagerApi
 
             app.UseHttpsRedirection();
             app.UseMvc();
+            app.UseOpenApi(); 
+            app.UseSwaggerUi3();
+
         }
     }
 }
