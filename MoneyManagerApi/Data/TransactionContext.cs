@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MoneyManagerApi.Data.Mappers;
 using MoneyManagerApi.Models;
+using System;
 
 namespace MoneyManagerApi.Data
 {
@@ -12,13 +13,13 @@ namespace MoneyManagerApi.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.ApplyConfiguration(new CostConfiguration());
-            modelBuilder.Entity<Cost>().HasData(
-                   new Cost { Id = 1, Name = "DansLessen", Type = Frequency.monthly, Amount = 50m},
-                   new Cost { Id = 2, Name = "netflix", Type = Frequency.monthly, Amount = 12m},
-                   new Cost { Id = 3, Name = "booschappn", Type = Frequency.oneOff, Amount = 69.60m }
+            modelBuilder.ApplyConfiguration(new TransactionConfiguration());
+            modelBuilder.Entity<Transaction>().HasData(
+                   new Transaction { Id = 1, Name = "DansLessen", Type = Frequency.monthly, Amount = 50m, TransactionDateTime = new DateTime()},
+                   new Transaction { Id = 2, Name = "netflix", Type = Frequency.monthly, Amount = 12m, TransactionDateTime = new DateTime() },
+                   new Transaction { Id = 3, Name = "booschappn", Type = Frequency.oneOff, Amount = 69.60m, TransactionDateTime = new DateTime() }
                 );
         }
-        public DbSet<Cost> Costs { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
     }
 }

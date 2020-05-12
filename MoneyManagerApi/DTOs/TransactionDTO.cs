@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 
 namespace MoneyManagerApi.DTOs
 {
-    public class CostDTO
+    public class TransactionDTO
     {
         [Required]
         public string Name { get; set; }
         [Required]
-        public Frequency TypeCost { get; set; }
+        public Frequency TransactionFrequency { get; set; }
         [Required]
         public decimal Amount { get; set; }
+        public DateTime TransactionDateTime { get; set; }
     }
 }

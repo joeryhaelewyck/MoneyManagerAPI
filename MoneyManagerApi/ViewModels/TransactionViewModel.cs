@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace MoneyManagerApi.ViewModels
 {
-    public class CostViewModel
+    public class TransactionViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; }

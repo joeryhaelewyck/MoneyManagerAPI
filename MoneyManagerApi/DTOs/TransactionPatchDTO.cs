@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace MoneyManagerApi.DTOs
 {
-    public class CostPatchDTO
+    public class TransactionPatchDTO
     {
         public decimal Amount { get; set; }
     }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MoneyManagerApi.Models
 {
-    public class Cost
+    public class Transaction
     {
         [Column("ID")]
         public int Id { get; set; }
@@ -16,13 +16,15 @@ namespace MoneyManagerApi.Models
         public Frequency Type { get; set; }
         [Column("AMOUNT")]
         public Decimal Amount { get; set; }
-        
-        public Cost(){}
-        public Cost(string name, Frequency type, int amount)
+        public DateTime TransactionDateTime { get; set; }
+
+        public Transaction() {}
+        public Transaction(string name, Frequency type, decimal amount, DateTime transactionDateTime)
         {
             Name = name;
             Type = type;
             Amount = amount;
+            TransactionDateTime = transactionDateTime;
         }
     }
 }

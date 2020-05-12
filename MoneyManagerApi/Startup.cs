@@ -36,7 +36,7 @@ namespace MoneyManagerApi
                 opt.UseSqlServer(Configuration.GetConnectionString("TransactionContext")));
 
             services.AddScoped<DataInitializer>();
-            services.AddScoped<ICostRepository, CostRepository>();
+            services.AddScoped<ITransactionRepository, TransactionRepository>();
             services.AddSwaggerDocument();
         }
 

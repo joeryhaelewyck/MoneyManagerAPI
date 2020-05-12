@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace MoneyManagerApi.Data.Mappers
 {
-    public class CostConfiguration : IEntityTypeConfiguration<Cost>
+    public class TransactionConfiguration : IEntityTypeConfiguration<Transaction>
     {
-        public void Configure(EntityTypeBuilder<Cost> builder)
+        public void Configure(EntityTypeBuilder<Transaction> builder)
         {
             //table name
             builder.ToTable("Costs");
