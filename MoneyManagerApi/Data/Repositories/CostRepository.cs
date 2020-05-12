@@ -35,17 +35,17 @@ namespace MoneyManagerApi.Data.Repositories
 
         public Cost getById(int id)
         {
-            throw new NotImplementedException();
+            return _costs.SingleOrDefault(c => c.Id == id);
         }
 
         public Cost getByName(string name)
         {
-            throw new NotImplementedException();
+            return _costs.SingleOrDefault(c => c.Name == name);
         }
 
         public IEnumerable<Cost> getByType(string type)
         {
-            throw new NotImplementedException();
+            return _costs.Where(c => c.Type == type);
         }
 
         public void SaveChanges()

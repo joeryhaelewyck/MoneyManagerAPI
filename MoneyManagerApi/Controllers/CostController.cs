@@ -24,5 +24,23 @@ namespace MoneyManagerApi.Controllers
         {
             return _costRepository.getAll();
         }
+        [HttpGet]
+        [Route("api/[controller]/{id}")]
+        public Cost getCostById(int id)
+        {
+            return _costRepository.getById(id);
+        }
+        [HttpGet]
+        [Route("api/[controller]/name/{name}")]
+        public Cost getCostByName(string name)
+        {
+            return _costRepository.getByName(name);
+        }
+        [HttpGet]
+        [Route("api/[controller]/type/{type}")]
+        public IEnumerable<Cost> getCostsByType(string type)
+        {
+            return _costRepository.getByType(type);
+        }
     }
 }
