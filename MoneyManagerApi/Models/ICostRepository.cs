@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace MoneyManagerApi.Models
 {
-    interface ICostRepository
+    public interface ICostRepository
     {
         Cost getById(int id);
         Cost getByName(string name);

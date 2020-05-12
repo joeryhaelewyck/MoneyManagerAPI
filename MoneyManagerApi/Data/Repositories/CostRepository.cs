@@ -1,4 +1,5 @@
-﻿using MoneyManagerApi.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using MoneyManagerApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,8 +7,16 @@ using System.Threading.Tasks;
 
 namespace MoneyManagerApi.Data.Repositories
 {
+    
     public class CostRepository : ICostRepository
     {
+        private readonly TransactionContext _context;
+        private readonly DbSet<Cost> _costs;
+        public CostRepository(TransactionContext context)
+        {
+            _context = context;
+            _costs = _context.Costs;
+        }
         public void Add(Cost cost)
         {
             throw new NotImplementedException();
@@ -20,7 +29,8 @@ namespace MoneyManagerApi.Data.Repositories
 
         public IEnumerable<Cost> getAll()
         {
-            throw new NotImplementedException();
+            var costs = _costs.AsQueryable();
+            return costs.ToList();
         }
 
         public Cost getById(int id)
