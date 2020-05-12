@@ -19,7 +19,7 @@ namespace MoneyManagerApi.Data.Repositories
         }
         public void Add(Cost cost)
         {
-            throw new NotImplementedException();
+            _costs.Add(cost);
         }
 
         public void Delete(Cost cost)
@@ -50,7 +50,7 @@ namespace MoneyManagerApi.Data.Repositories
 
         public void SaveChanges()
         {
-            throw new NotImplementedException();
+            _context.SaveChanges();
         }
 
         public void Update(Cost cost)

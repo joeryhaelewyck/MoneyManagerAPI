@@ -5,6 +5,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MoneyManagerApi.DTOs;
 using MoneyManagerApi.Models;
 
 namespace MoneyManagerApi.Controllers
@@ -41,6 +42,16 @@ namespace MoneyManagerApi.Controllers
         public IEnumerable<Cost> getCostsByType(string type)
         {
             return _costRepository.getByType(type);
+        }
+        [HttpPost]
+        [Route("api/[controller]/")]
+        public ActionResult<Cost> PostCost(CostDTO costDTO)
+        {
+            Cost costToCreate = new Cost() { Name = costDTO.Name, Type = costDTO.Type, Amount = costDTO.Amount };
+            _costRepository.Add(costToCreate);
+            _costRepository.SaveChanges();
+
+            return CreatedAtAction(nameof(getCostById), new { id = costToCreate.Id }, costToCreate);
         }
     }
 }
