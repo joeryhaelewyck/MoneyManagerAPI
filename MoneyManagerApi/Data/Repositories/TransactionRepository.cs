@@ -45,7 +45,7 @@ namespace MoneyManagerApi.Data.Repositories
 
         public IEnumerable<Transaction> getByType(Frequency typeCost)
         {
-            return _transactions.Where(c => c.Type == typeCost);
+            return _transactions.Where(c => c.FrequencyTransaction == typeCost);
         }
 
         public void SaveChanges()

@@ -12,8 +12,8 @@ namespace MoneyManagerApi.Models
         public int Id { get; set; }
         [Column("NAME")]
         public string Name { get; set; }
-        [Column("TYPE")]
-        public Frequency Type { get; set; }
+        [Column("FREQUENCY")]
+        public Frequency FrequencyTransaction { get; set; }
         [Column("AMOUNT")]
         public Decimal Amount { get; set; }
         [Column("TIMESTAMP")]
@@ -23,7 +23,7 @@ namespace MoneyManagerApi.Models
         public Transaction(string name, Frequency type, decimal amount, DateTime transactionDateTime)
         {
             Name = name;
-            Type = type;
+            FrequencyTransaction = type;
             Amount = amount;
             TransactionDateTime = transactionDateTime;
         }

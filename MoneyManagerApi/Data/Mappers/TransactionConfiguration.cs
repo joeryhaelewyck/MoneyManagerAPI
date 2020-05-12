@@ -13,13 +13,14 @@ namespace MoneyManagerApi.Data.Mappers
         public void Configure(EntityTypeBuilder<Transaction> builder)
         {
             //table name
-            builder.ToTable("Costs");
+            builder.ToTable("Transactions");
             //Primary key
-            builder.HasKey(C => C.Id);
+            builder.HasKey(T => T.Id);
             //Properties
-            builder.Property(C => C.Name).HasColumnName("NAME").IsRequired();
-            builder.Property(C => C.Type).HasColumnName("TYPE").IsRequired();
-            builder.Property(C => C.Amount).HasColumnName("Amount").IsRequired();
+            builder.Property(T => T.Name).HasColumnName("NAME").IsRequired();
+            builder.Property(T => T.FrequencyTransaction).HasColumnName("FREQUENCY").IsRequired();
+            builder.Property(T => T.Amount).HasColumnName("AMOUNT").IsRequired();
+            builder.Property(T => T.TransactionDateTime).HasColumnName("DATE").IsRequired();
         }
     }
 }
