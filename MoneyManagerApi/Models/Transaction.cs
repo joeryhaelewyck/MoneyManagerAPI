@@ -16,6 +16,7 @@ namespace MoneyManagerApi.Models
         public Frequency Type { get; set; }
         [Column("AMOUNT")]
         public Decimal Amount { get; set; }
+        [Column("TIMESTAMP")]
         public DateTime TransactionDateTime { get; set; }
 
         public Transaction() {}
