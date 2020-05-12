@@ -61,12 +61,26 @@ namespace MoneyManagerApi.Controllers
             {
                 return BadRequest("please insert information");
             };
-            if(_costRepository.getById(id) == null)
+            Cost currentCost = _costRepository.getById(id);
+            if (currentCost == null)
             {
                 return NotFound();
             }
-            Cost currentCost = _costRepository.getById(id);
+            
             return _costRepository.UpdateAmount(currentCost, costPatch);
+        }
+        [HttpDelete]
+        [Route("api/[controller]/{id}")]
+        public IActionResult DeleteCost(int id)
+        {
+            Cost cost = _costRepository.getById(id);
+            if (cost == null)
+            {
+                return NotFound();
+            }
+            _costRepository.Delete(cost);
+            _costRepository.SaveChanges();
+            return NoContent();
         }
     }
 }

@@ -25,7 +25,7 @@ namespace MoneyManagerApi.Data.Repositories
 
         public void Delete(Cost cost)
         {
-            throw new NotImplementedException();
+            _costs.Remove(cost);
         }
 
         public IEnumerable<Cost> getAll()
