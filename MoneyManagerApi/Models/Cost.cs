@@ -10,7 +10,7 @@ namespace MoneyManagerApi.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Type { get; set; }
-        public int Amount { get; set; }
+        public Decimal Amount { get; set; }
         
         public Cost(){}
         public Cost(string name, string type, int amount)
