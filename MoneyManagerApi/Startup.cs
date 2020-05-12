@@ -6,10 +6,12 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using MoneyManagerApi.Data;
 
 namespace MoneyManagerApi
 {
@@ -26,6 +28,8 @@ namespace MoneyManagerApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddDbContext<TransactionContext>(opt =>
+                opt.UseSqlServer(Configuration.GetConnectionString("TransactionContext")));
             services.AddSwaggerDocument();
         }
 
