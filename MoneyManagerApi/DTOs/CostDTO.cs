@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MoneyManagerApi.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace MoneyManagerApi.DTOs
         [Required]
         public string Name { get; set; }
         [Required]
-        public string Type { get; set; }
+        public Frequency TypeCost { get; set; }
         [Required]
         public decimal Amount { get; set; }
     }

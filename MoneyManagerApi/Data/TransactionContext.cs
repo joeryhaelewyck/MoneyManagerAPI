@@ -13,11 +13,10 @@ namespace MoneyManagerApi.Data
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new CostConfiguration());
-
             modelBuilder.Entity<Cost>().HasData(
-                   new Cost { Id = 1, Name = "DansLessen", Type = "Maandelijks", Amount = 50m},
-                   new Cost { Id = 2, Name = "netflix", Type = "Maandelijks", Amount = 12m},
-                   new Cost { Id = 3, Name = "booschappn", Type = "eenmalig", Amount = 69.60m }
+                   new Cost { Id = 1, Name = "DansLessen", Type = Frequency.monthly, Amount = 50m},
+                   new Cost { Id = 2, Name = "netflix", Type = Frequency.monthly, Amount = 12m},
+                   new Cost { Id = 3, Name = "booschappn", Type = Frequency.oneOff, Amount = 69.60m }
                 );
         }
         public DbSet<Cost> Costs { get; set; }

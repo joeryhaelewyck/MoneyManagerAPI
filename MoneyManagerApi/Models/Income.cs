@@ -9,11 +9,11 @@ namespace MoneyManagerApi.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Type { get; set; }
+        public Frequency Type { get; set; }
         public Decimal Amount { get; set; }
 
         public Income() { }
-        public Income(string name, string type, int amount)
+        public Income(string name, Frequency type, int amount)
         {
             Name = name;
             Type = type;

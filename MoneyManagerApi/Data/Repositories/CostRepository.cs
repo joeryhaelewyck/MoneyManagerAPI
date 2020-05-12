@@ -1,14 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MoneyManagerApi.Data.Repositories.Contracts;
 using MoneyManagerApi.DTOs;
 using MoneyManagerApi.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace MoneyManagerApi.Data.Repositories
 {
-    
+
     public class CostRepository : ICostRepository
     {
         private readonly TransactionContext _context;
@@ -44,9 +43,9 @@ namespace MoneyManagerApi.Data.Repositories
             return _costs.SingleOrDefault(c => c.Name == name);
         }
 
-        public IEnumerable<Cost> getByType(string type)
+        public IEnumerable<Cost> getByType(Frequency typeCost)
         {
-            return _costs.Where(c => c.Type == type);
+            return _costs.Where(c => c.Type == typeCost);
         }
 
         public void SaveChanges()

@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MoneyManagerApi.Data;
 using MoneyManagerApi.Data.Repositories;
+using MoneyManagerApi.Data.Repositories.Contracts;
 using MoneyManagerApi.Models;
 
 namespace MoneyManagerApi

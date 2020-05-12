@@ -13,12 +13,12 @@ namespace MoneyManagerApi.Models
         [Column("NAME")]
         public string Name { get; set; }
         [Column("TYPE")]
-        public string Type { get; set; }
+        public Frequency Type { get; set; }
         [Column("AMOUNT")]
         public Decimal Amount { get; set; }
         
         public Cost(){}
-        public Cost(string name, string type, int amount)
+        public Cost(string name, Frequency type, int amount)
         {
             Name = name;
             Type = type;
