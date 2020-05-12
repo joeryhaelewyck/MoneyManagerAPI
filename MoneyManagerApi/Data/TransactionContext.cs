@@ -15,9 +15,9 @@ namespace MoneyManagerApi.Data
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new TransactionConfiguration());
             modelBuilder.Entity<Transaction>().HasData(
-                   new Transaction { Id = 1, Name = "DansLessen", Type = Frequency.monthly, Amount = 50m, TransactionDateTime = new DateTime()},
-                   new Transaction { Id = 2, Name = "netflix", Type = Frequency.monthly, Amount = 12m, TransactionDateTime = new DateTime() },
-                   new Transaction { Id = 3, Name = "booschappn", Type = Frequency.oneOff, Amount = 69.60m, TransactionDateTime = new DateTime() }
+                   new Transaction { Id = 1, Name = "DansLessen", Type = Frequency.monthly, Amount = 50m, TransactionDateTime = new DateTime(2020,1,18)},
+                   new Transaction { Id = 2, Name = "netflix", Type = Frequency.monthly, Amount = 12m, TransactionDateTime = new DateTime(2020, 1, 18) },
+                   new Transaction { Id = 3, Name = "booschappn", Type = Frequency.oneOff, Amount = 69.60m, TransactionDateTime = new DateTime(2020, 1, 18) }
                 );
         }
         public DbSet<Transaction> Transactions { get; set; }
