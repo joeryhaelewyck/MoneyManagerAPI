@@ -12,6 +12,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MoneyManagerApi.Data;
+using MoneyManagerApi.Data.Repositories;
+using MoneyManagerApi.Models;
 
 namespace MoneyManagerApi
 {
@@ -28,13 +30,17 @@ namespace MoneyManagerApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
             services.AddDbContext<TransactionContext>(opt =>
                 opt.UseSqlServer(Configuration.GetConnectionString("TransactionContext")));
+
+            services.AddScoped<DataInitializer>();
+            services.AddScoped<ICostRepository, CostRepository>();
             services.AddSwaggerDocument();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, DataInitializer dataInitializer)
         {
             if (env.IsDevelopment())
             {
@@ -50,6 +56,8 @@ namespace MoneyManagerApi
             app.UseMvc();
             app.UseOpenApi(); 
             app.UseSwaggerUi3();
+
+            dataInitializer.InitializeData();
 
         }
     }
