@@ -1,0 +1,23 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace MoneyManagerApi.Models
+{
+    public class Income
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Type { get; set; }
+        public int Amount { get; set; }
+
+        public Income() { }
+        public Income(string name, string type, int amount)
+        {
+            Name = name;
+            Type = type;
+            Amount = amount;
+        }
+    }
+}
