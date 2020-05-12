@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MoneyManagerApi.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,7 +14,7 @@ namespace MoneyManagerApi.Models
         IEnumerable<Cost> getAll();
         void Add(Cost cost);
         void Delete(Cost cost);
-        void Update(Cost cost);
+        Cost UpdateAmount(Cost cost, CostPatchDTO costPatchDTO);
         void SaveChanges();
     }
 }

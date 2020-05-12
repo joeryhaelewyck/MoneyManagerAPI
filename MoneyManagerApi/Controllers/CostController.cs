@@ -53,5 +53,20 @@ namespace MoneyManagerApi.Controllers
 
             return CreatedAtAction(nameof(getCostById), new { id = costToCreate.Id }, costToCreate);
         }
+        [HttpPatch]
+        [Route("api/[controller]/{id}")]
+        public ActionResult<Cost> PatchAmountCost(int id,CostPatchDTO costPatch)
+        {
+            if(costPatch == null)
+            {
+                return BadRequest("please insert information");
+            };
+            if(_costRepository.getById(id) == null)
+            {
+                return NotFound();
+            }
+            Cost currentCost = _costRepository.getById(id);
+            return _costRepository.UpdateAmount(currentCost, costPatch);
+        }
     }
 }

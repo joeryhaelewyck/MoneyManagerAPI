@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MoneyManagerApi.DTOs;
 using MoneyManagerApi.Models;
 using System;
 using System.Collections.Generic;
@@ -53,9 +54,12 @@ namespace MoneyManagerApi.Data.Repositories
             _context.SaveChanges();
         }
 
-        public void Update(Cost cost)
+        public Cost UpdateAmount(Cost currentCost, CostPatchDTO costPatchDTO)
         {
-            throw new NotImplementedException();
+            currentCost.Amount = costPatchDTO.Amount;
+            _costs.Update(currentCost);
+            SaveChanges();
+            return currentCost;
         }
     }
 }
