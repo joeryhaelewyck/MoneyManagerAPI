@@ -37,6 +37,14 @@ namespace MoneyManagerApi
 
             services.AddScoped<DataInitializer>();
             services.AddScoped<ITransactionRepository, TransactionRepository>();
+            services.AddOpenApiDocument(c => 
+            { 
+                c.DocumentName = "apidocs"; 
+                c.Title = "RecipeAPI"; 
+                c.Version = "v1"; 
+                c.Description = "The Transaction documentation description."; 
+            });
+
             services.AddSwaggerDocument();
         }
 
