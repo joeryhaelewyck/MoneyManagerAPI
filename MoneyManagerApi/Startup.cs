@@ -44,8 +44,7 @@ namespace MoneyManagerApi
                 c.Version = "v1"; 
                 c.Description = "The Transaction documentation description."; 
             });
-
-            services.AddSwaggerDocument();
+            services.AddCors(options => options.AddPolicy("AllowAllOrigins", builder => builder.AllowAnyOrigin()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -65,6 +64,8 @@ namespace MoneyManagerApi
             app.UseMvc();
             app.UseOpenApi(); 
             app.UseSwaggerUi3();
+            app.UseCors("AllowAllOrigins");
+
 
             dataInitializer.InitializeData();
 
