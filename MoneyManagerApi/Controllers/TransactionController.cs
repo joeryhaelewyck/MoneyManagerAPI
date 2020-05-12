@@ -16,9 +16,9 @@ namespace MoneyManagerApi.Controllers
     public class TransactionController : ControllerBase
     {
         private readonly ITransactionRepository _transactionRepository;
-        public TransactionController(ITransactionRepository costRepository)
+        public TransactionController(ITransactionRepository transactionRepository)
         {
-            _transactionRepository = costRepository;
+            _transactionRepository = transactionRepository;
         }
 
         [HttpGet]
@@ -27,6 +27,21 @@ namespace MoneyManagerApi.Controllers
         {
             return _transactionRepository.getAll();
         }
+
+        [HttpGet]
+        [Route("api/[controller]/earnings")]
+        public IEnumerable<Transaction> getEarnings()
+        {
+            return _transactionRepository.getEarnings();
+        }
+
+        [HttpGet]
+        [Route("api/[controller]/expenses")]
+        public IEnumerable<Transaction> getExpenses()
+        {
+            return _transactionRepository.getExpenses();
+        }
+
 
         [HttpGet]
         [Route("api/[controller]/{id}")]

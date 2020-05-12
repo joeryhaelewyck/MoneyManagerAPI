@@ -17,22 +17,30 @@ namespace MoneyManagerApi.Data.Repositories
             _context = context;
             _transactions = _context.Transactions;
         }
-        public void Add(Transaction cost)
+        public void Add(Transaction transaction)
         {
-            _transactions.Add(cost);
+            _transactions.Add(transaction);
         }
 
-        public void Delete(Transaction cost)
+        public void Delete(Transaction transaction)
         {
-            _transactions.Remove(cost);
+            _transactions.Remove(transaction);
         }
 
         public IEnumerable<Transaction> getAll()
         {
-            var costs = _transactions.AsQueryable();
-            return costs.ToList();
+            var transactions = _transactions.AsQueryable();
+            return transactions.ToList();
         }
 
+        public IEnumerable<Transaction> getEarnings()
+        {
+            return _transactions.Where(t => t.Amount >= 0).OrderBy(t => t.TransactionDateTime).ToList();
+        } 
+        public IEnumerable<Transaction> getExpenses()
+        {
+            return _transactions.Where(t => t.Amount < 0).OrderBy(t => t.TransactionDateTime).ToList();
+        }
         public Transaction getById(int id)
         {
             return _transactions.SingleOrDefault(c => c.Id == id);
@@ -43,9 +51,9 @@ namespace MoneyManagerApi.Data.Repositories
             return _transactions.SingleOrDefault(c => c.Name == name);
         }
 
-        public IEnumerable<Transaction> getByType(Frequency typeCost)
+        public IEnumerable<Transaction> getByType(Frequency frequency)
         {
-            return _transactions.Where(c => c.FrequencyTransaction == typeCost);
+            return _transactions.Where(c => c.FrequencyTransaction == frequency);
         }
 
         public void SaveChanges()
