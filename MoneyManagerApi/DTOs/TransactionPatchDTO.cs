@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace MoneyManagerApi.DTOs
+﻿namespace MoneyManagerApi.DTOs
 {
-    public class TransactionPatchDTO
+    public class TransactionPatchDto
     {
         public decimal Amount { get; set; }
     }

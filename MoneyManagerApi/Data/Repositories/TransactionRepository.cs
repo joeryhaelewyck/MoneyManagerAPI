@@ -27,31 +27,31 @@ namespace MoneyManagerApi.Data.Repositories
             _transactions.Remove(transaction);
         }
 
-        public IEnumerable<Transaction> getAll()
+        public IEnumerable<Transaction> GetAll()
         {
             var transactions = _transactions.AsQueryable();
             return transactions.ToList();
         }
 
-        public IEnumerable<Transaction> getEarnings()
+        public IEnumerable<Transaction> GetEarnings()
         {
             return _transactions.Where(t => t.Amount >= 0).OrderBy(t => t.TransactionDateTime).ToList();
-        } 
-        public IEnumerable<Transaction> getExpenses()
+        }
+        public IEnumerable<Transaction> GetExpenses()
         {
             return _transactions.Where(t => t.Amount < 0).OrderBy(t => t.TransactionDateTime).ToList();
         }
-        public Transaction getById(int id)
+        public Transaction GetById(int id)
         {
             return _transactions.SingleOrDefault(c => c.Id == id);
         }
 
-        public Transaction getByName(string name)
+        public Transaction GetByName(string name)
         {
             return _transactions.SingleOrDefault(c => c.Name == name);
         }
 
-        public IEnumerable<Transaction> getByType(Frequency frequency)
+        public IEnumerable<Transaction> GetByType(Frequency frequency)
         {
             return _transactions.Where(c => c.FrequencyTransaction == frequency);
         }
@@ -61,9 +61,9 @@ namespace MoneyManagerApi.Data.Repositories
             _context.SaveChanges();
         }
 
-        public Transaction UpdateAmount(Transaction currentCost, TransactionPatchDTO costPatchDTO)
+        public Transaction UpdateAmount(Transaction currentCost, TransactionPatchDto costPatchDto)
         {
-            currentCost.Amount = costPatchDTO.Amount;
+            currentCost.Amount = costPatchDto.Amount;
             _transactions.Update(currentCost);
             SaveChanges();
             return currentCost;

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using MoneyManagerApi.Data.Repositories.Contracts;
 using MoneyManagerApi.DTOs;
@@ -27,9 +22,9 @@ namespace MoneyManagerApi.Controllers
         /// <returns>array of transactions</returns>
         [HttpGet]
         [Route("api/[controller]")]
-        public IEnumerable<Transaction> getTransactions()
+        public IEnumerable<Transaction> GetTransactions()
         {
-            return _transactionRepository.getAll();
+            return _transactionRepository.GetAll();
         }
 
         // GET: api/Transactions/earnings
@@ -39,9 +34,9 @@ namespace MoneyManagerApi.Controllers
         /// <returns>array of transactions</returns>
         [HttpGet]
         [Route("api/[controller]/earnings")]
-        public IEnumerable<Transaction> getEarnings()
+        public IEnumerable<Transaction> GetEarnings()
         {
-            return _transactionRepository.getEarnings();
+            return _transactionRepository.GetEarnings();
         }
 
         // GET: api/Transactions/expenses
@@ -51,9 +46,9 @@ namespace MoneyManagerApi.Controllers
         /// <returns>array of transactions</returns>
         [HttpGet]
         [Route("api/[controller]/expenses")]
-        public IEnumerable<Transaction> getExpenses()
+        public IEnumerable<Transaction> GetExpenses()
         {
-            return _transactionRepository.getExpenses();
+            return _transactionRepository.GetExpenses();
         }
 
         // GET: api/Transactions/1
@@ -63,9 +58,9 @@ namespace MoneyManagerApi.Controllers
         /// <returns>one transaction</returns>
         [HttpGet]
         [Route("api/[controller]/{id}")]
-        public Transaction getTransactionById(int id)
+        public Transaction GetTransactionById(int id)
         {
-            return _transactionRepository.getById(id);
+            return _transactionRepository.GetById(id);
         }
 
         // GET: api/Transactions/name/netflix
@@ -75,9 +70,9 @@ namespace MoneyManagerApi.Controllers
         /// <returns>one transaction</returns>
         [HttpGet]
         [Route("api/[controller]/name/{name}")]
-        public Transaction getTransactionByName(string name)
+        public Transaction GetTransactionByName(string name)
         {
-            return _transactionRepository.getByName(name);
+            return _transactionRepository.GetByName(name);
         }
 
         // GET: api/Transactions/type/1
@@ -87,24 +82,24 @@ namespace MoneyManagerApi.Controllers
         /// <returns>an array of transactions</returns>
         [HttpGet]
         [Route("api/[controller]/type/{type}")]
-        public IEnumerable<Transaction> getTransactionByFrequency(Frequency type)
+        public IEnumerable<Transaction> GetTransactionByFrequency(Frequency type)
         {
-            return _transactionRepository.getByType(type);
+            return _transactionRepository.GetByType(type);
         }
         // POST: api/Transactions
         /// <summary>
         /// Adds a new transaction
         /// </summary>
-        /// <param name="transactionDTO">the new transaction</param>
+        /// <param name="transactionDto">the new transaction</param>
         [HttpPost]
         [Route("api/[controller]/")]
-        public ActionResult<Transaction> PostTransaction(TransactionDTO transactionDTO)
+        public ActionResult<Transaction> PostTransaction(TransactionDto transactionDto)
         {
-            Transaction transactionToCreate = new Transaction(transactionDTO.Name, transactionDTO.TransactionFrequency, transactionDTO.Amount, transactionDTO.TransactionDateTime);
+            Transaction transactionToCreate = new Transaction(transactionDto.Name, transactionDto.TransactionFrequency, transactionDto.Amount, transactionDto.TransactionDateTime);
             _transactionRepository.Add(transactionToCreate);
             _transactionRepository.SaveChanges();
 
-            return CreatedAtAction(nameof(getTransactionById), new { id = transactionToCreate.Id }, transactionToCreate);
+            return CreatedAtAction(nameof(GetTransactionById), new { id = transactionToCreate.Id }, transactionToCreate);
         }
         // PUT: api/Transactions/3
         /// <summary>
@@ -114,13 +109,14 @@ namespace MoneyManagerApi.Controllers
         /// <param name="transactionPatch">the modified transaction</param>
         [HttpPatch]
         [Route("api/[controller]/{id}")]
-        public ActionResult<Transaction> PatchAmountTransaction(int id, TransactionPatchDTO transactionPatch)
+        public ActionResult<Transaction> PatchAmountTransaction(int id, TransactionPatchDto transactionPatch)
         {
             if (transactionPatch == null)
             {
                 return BadRequest("please insert information");
-            };
-            Transaction currentTransaction = _transactionRepository.getById(id);
+            }
+
+            Transaction currentTransaction = _transactionRepository.GetById(id);
             if (currentTransaction == null)
             {
                 return NotFound();
@@ -138,7 +134,7 @@ namespace MoneyManagerApi.Controllers
         [Route("api/[controller]/{id}")]
         public IActionResult DeleteTransaction(int id)
         {
-            Transaction transaction = _transactionRepository.getById(id);
+            Transaction transaction = _transactionRepository.GetById(id);
             if (transaction == null)
             {
                 return NotFound();

@@ -1,20 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using MoneyManagerApi.Data;
 using MoneyManagerApi.Data.Repositories;
 using MoneyManagerApi.Data.Repositories.Contracts;
-using MoneyManagerApi.Models;
 
 namespace MoneyManagerApi
 {
@@ -37,12 +29,12 @@ namespace MoneyManagerApi
 
             services.AddScoped<DataInitializer>();
             services.AddScoped<ITransactionRepository, TransactionRepository>();
-            services.AddOpenApiDocument(c => 
-            { 
-                c.DocumentName = "apidocs"; 
-                c.Title = "RecipeAPI"; 
-                c.Version = "v1"; 
-                c.Description = "The Transaction documentation description."; 
+            services.AddOpenApiDocument(c =>
+            {
+                c.DocumentName = "apidocs";
+                c.Title = "RecipeAPI";
+                c.Version = "v1";
+                c.Description = "The Transaction documentation description.";
             });
             services.AddCors(options => options.AddPolicy("AllowAllOrigins", builder => builder.AllowAnyOrigin()));
         }
@@ -62,7 +54,7 @@ namespace MoneyManagerApi
 
             app.UseHttpsRedirection();
             app.UseMvc();
-            app.UseOpenApi(); 
+            app.UseOpenApi();
             app.UseSwaggerUi3();
             app.UseCors("AllowAllOrigins");
 

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace MoneyManagerApi.Data
+﻿namespace MoneyManagerApi.Data
 {
-   
+
     public class DataInitializer
     {
         private readonly TransactionContext _context;
