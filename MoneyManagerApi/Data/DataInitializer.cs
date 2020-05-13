@@ -10,8 +10,8 @@
         }
         public void InitializeData()
         {
-            //_context.Database.EnsureDeleted();
-            //_context.Database.EnsureCreated();
+            _context.Database.EnsureDeleted();
+            _context.Database.EnsureCreated();
         }
     }
 }
