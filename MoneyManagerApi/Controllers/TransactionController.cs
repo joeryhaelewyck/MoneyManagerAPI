@@ -106,11 +106,11 @@ namespace MoneyManagerApi.Controllers
         [Route("api/[controller]/")]
         public ActionResult<TransactionVM> PostTransaction(TransactionDto transactionDto)
         {
-            var transactionToCreate = new Transaction(transactionDto.Name, transactionDto.TransactionFrequency, transactionDto.Amount, transactionDto.TransactionDateTime);
-            _transactionRepository.Add(transactionToCreate);
+            var transaction = _transactionMapper.Map(transactionDto);
+            _transactionRepository.Add(transaction);
             _transactionRepository.SaveChanges();
 
-            return CreatedAtAction(nameof(GetTransactionById), new { id = transactionToCreate.Id }, transactionToCreate);
+            return CreatedAtAction(nameof(GetTransactionById), new { id = transaction.Id }, transaction);
         }
         // PUT: api/Transactions/3
         /// <summary>
