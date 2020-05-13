@@ -1,6 +1,7 @@
 ﻿namespace MoneyManagerApi.ViewModels
 {
-    public class TransactionViewModel
+    // ReSharper disable once InconsistentNaming
+    public class TransactionVM
     {
         public int Id { get; set; }
         public string Name { get; set; }
