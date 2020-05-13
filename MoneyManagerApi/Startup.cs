@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using MoneyManagerApi.Data;
 using MoneyManagerApi.Data.Repositories;
 using MoneyManagerApi.Data.Repositories.Contracts;
+using MoneyManagerApi.Mappers;
 
 namespace MoneyManagerApi
 {
@@ -29,6 +30,7 @@ namespace MoneyManagerApi
 
             services.AddScoped<DataInitializer>();
             services.AddScoped<ITransactionRepository, TransactionRepository>();
+            services.AddScoped<TransactionMapper>();
             services.AddOpenApiDocument(c =>
             {
                 c.DocumentName = "apidocs";
