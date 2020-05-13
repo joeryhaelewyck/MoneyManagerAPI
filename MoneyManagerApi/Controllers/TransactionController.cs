@@ -104,7 +104,7 @@ namespace MoneyManagerApi.Controllers
         /// <param name="transactionDto">the new transaction</param>
         [HttpPost]
         [Route("api/[controller]/")]
-        public ActionResult<TransactionVM> PostTransaction(TransactionDto transactionDto)
+        public ActionResult<TransactionVM> CreateTransaction(TransactionDto transactionDto)
         {
             var transaction = _transactionMapper.Map(transactionDto);
             _transactionRepository.Add(transaction);
@@ -117,23 +117,18 @@ namespace MoneyManagerApi.Controllers
         /// Modifies the amount of a transaction
         /// </summary>
         /// <param name="id">id of the transaction to be modified</param>
-        /// <param name="transactionPatch">the modified transaction</param>
+        /// <param name="amount">the modified transaction</param>
         [HttpPatch]
         [Route("api/[controller]/{id}")]
-        public ActionResult<TransactionVM> PatchAmountTransaction(int id, TransactionPatchDto transactionPatch)
+        public ActionResult<TransactionVM> UpdateAmountTransaction(int id, decimal amount)
         {
-            if (transactionPatch == null)
-            {
-                return BadRequest("please insert information");
-            }
-
             var currentTransaction = _transactionRepository.GetById(id);
             if (currentTransaction == null)
             {
                 return NotFound();
             }
 
-            var transaction = _transactionRepository.UpdateAmount(currentTransaction, transactionPatch);
+            var transaction = _transactionRepository.UpdateAmount(currentTransaction, amount);
             return _transactionMapper.Map(transaction);
         }
 

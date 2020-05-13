@@ -61,9 +61,9 @@ namespace MoneyManagerApi.Data.Repositories
             _context.SaveChanges();
         }
 
-        public Transaction UpdateAmount(Transaction currentCost, TransactionPatchDto costPatchDto)
+        public Transaction UpdateAmount(Transaction currentCost, decimal amount)
         {
-            currentCost.Amount = costPatchDto.Amount;
+            currentCost.Amount = amount;
             _transactions.Update(currentCost);
             SaveChanges();
             return currentCost;

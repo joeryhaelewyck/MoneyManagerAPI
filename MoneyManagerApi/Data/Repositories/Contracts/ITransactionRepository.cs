@@ -14,7 +14,7 @@ namespace MoneyManagerApi.Data.Repositories.Contracts
         IEnumerable<Transaction> GetExpenses();
         void Add(Transaction cost);
         void Delete(Transaction cost);
-        Transaction UpdateAmount(Transaction cost, TransactionPatchDto costPatchDto);
+        Transaction UpdateAmount(Transaction cost, decimal amount);
         void SaveChanges();
     }
 }
