@@ -84,22 +84,9 @@ namespace MoneyManagerApi
                         ValidateAudience = false,
                         ValidateLifetime = true
                     };
-            })
-            .AddCookie(options =>
-            {
-                options.Events =
-                new CookieAuthenticationEvents
-                {
-                    OnRedirectToLogin = context =>
-                    {
-                        var loginPath = string.Concat("https://", context.Request.Host, "/Login");
-                        context.HttpContext.Response.Redirect(loginPath);
-                        return Task.CompletedTask;
-                    }
-                };
             });
 
-            }
+        }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, DataInitializer dataInitializer)
