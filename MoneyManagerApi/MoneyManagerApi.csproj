@@ -7,6 +7,7 @@
 
   <PropertyGroup>
 	<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	<UserSecretsId>3322099b-5827-4a45-95dc-41ebaedd4f69</UserSecretsId>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
@@ -21,6 +22,7 @@
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="NSwag.AspNetCore" Version="13.5.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.4.1" />
   </ItemGroup>
 
 </Project>
