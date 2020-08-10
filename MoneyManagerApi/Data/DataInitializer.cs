@@ -3,8 +3,8 @@
 
     public class DataInitializer
     {
-        private readonly TransactionContext _context;
-        public DataInitializer(TransactionContext context)
+        private readonly DataContext _context;
+        public DataInitializer(DataContext context)
         {
             _context = context;
         }

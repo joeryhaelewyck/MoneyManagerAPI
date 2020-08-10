@@ -10,9 +10,9 @@ namespace MoneyManagerApi.Data.Repositories
 
     public class TransactionRepository : ITransactionRepository
     {
-        private readonly TransactionContext _context;
+        private readonly DataContext _context;
         private readonly DbSet<Transaction> _transactions;
-        public TransactionRepository(TransactionContext context)
+        public TransactionRepository(DataContext context)
         {
             _context = context;
             _transactions = _context.Transactions;

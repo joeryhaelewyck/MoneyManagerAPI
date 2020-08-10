@@ -5,9 +5,9 @@ using System;
 
 namespace MoneyManagerApi.Data
 {
-    public class TransactionContext : DbContext
+    public class DataContext : DbContext
     {
-        public TransactionContext(DbContextOptions<TransactionContext> options) : base(options) 
+        public DataContext(DbContextOptions<DataContext> options) : base(options) 
         { 
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -22,5 +22,6 @@ namespace MoneyManagerApi.Data
                 );
         }
         public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

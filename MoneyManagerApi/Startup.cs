@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authentication.Cookies;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -7,20 +7,20 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
 using MoneyManagerApi.Data;
 using MoneyManagerApi.Data.Repositories;
 using MoneyManagerApi.Data.Repositories.Contracts;
 using MoneyManagerApi.Mappers;
 using MoneyManagerApi.Models;
+using MoneyManagerApi.Services;
+using MoneyManagerApi.Services.Contracts;
 using NSwag;
 using NSwag.Generation.Processors.Security;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OpenApiSecurityRequirement = NSwag.OpenApiSecurityRequirement;
 using OpenApiSecurityScheme = NSwag.OpenApiSecurityScheme;
+
 
 namespace MoneyManagerApi
 {
@@ -36,15 +36,12 @@ namespace MoneyManagerApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var jwtSettings = new JwtSettings();
-            Configuration.Bind(nameof(jwtSettings), jwtSettings);
-            services.AddSingleton(jwtSettings);
-
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
-            services.AddDbContext<TransactionContext>(opt =>
+            services.AddAutoMapper(typeof(Startup));
+            services.AddDbContext<DataContext>(opt =>
                 opt.UseSqlServer(Configuration.GetConnectionString("TransactionContext")));
 
+            services.AddScoped<IUserService, UserService>();
             services.AddScoped<DataInitializer>();
             services.AddScoped<ITransactionRepository, TransactionRepository>();
             services.AddScoped<TransactionMapper>();
@@ -64,26 +61,44 @@ namespace MoneyManagerApi
                 c.OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("JWT"));
 
             });
+
             services.AddCors(options => options.AddPolicy("AllowAllOrigins", builder => builder.AllowAnyOrigin()));
-            services.AddAuthentication(options =>
+            
+            var appSettingsSection = Configuration.GetSection("AppSettings");
+
+            var appSettings = appSettingsSection.Get<AppSettings>();
+            var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+            services.AddAuthentication(x =>
             {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             })
-            .AddJwtBearer(options =>
+            .AddJwtBearer(x =>
             {
-                options.RequireHttpsMetadata = false;
-                options.SaveToken = true;
-                options.TokenValidationParameters =
-                    new TokenValidationParameters
+                x.Events = new JwtBearerEvents
+                {
+                    OnTokenValidated = context =>
                     {
-                        ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtSettings.Secret)),
-                        ValidateIssuer = false,
-                        ValidateAudience = false,
-                        ValidateLifetime = true
-                    };
+                        var userService = context.HttpContext.RequestServices.GetRequiredService<IUserService>();
+                        var userId = int.Parse(context.Principal.Identity.Name);
+                        var user = userService.GetById(userId);
+                        if (user == null)
+                        {
+                            // return unauthorized if user no longer exists
+                            context.Fail("Unauthorized");
+                        }
+                        return Task.CompletedTask;
+                    }
+                };
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
             });
 
         }
@@ -105,7 +120,12 @@ namespace MoneyManagerApi
             app.UseMvc();
             app.UseOpenApi();
             app.UseSwaggerUi3();
-            app.UseCors("AllowAllOrigins");
+            app.UseCors(x => x
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+            );
+         
             app.UseAuthentication();
 
             dataInitializer.InitializeData();
