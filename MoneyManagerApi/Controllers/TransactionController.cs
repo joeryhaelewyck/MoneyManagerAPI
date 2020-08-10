@@ -28,7 +28,6 @@ namespace MoneyManagerApi.Controllers
         /// </summary>
         /// <returns>array of transactions</returns>
         [HttpGet]
-        [Route("api/[controller]")]
         public IEnumerable<TransactionVM> GetTransactions()
         {
             var transactions = _transactionRepository.GetAll();
@@ -41,7 +40,7 @@ namespace MoneyManagerApi.Controllers
         /// </summary>
         /// <returns>array of transactions</returns>
         [HttpGet]
-        [Route("api/[controller]/earnings")]
+        [Route("earnings")]
         public IEnumerable<TransactionVM> GetEarnings()
         {
             var transactions= _transactionRepository.GetEarnings();
@@ -54,7 +53,7 @@ namespace MoneyManagerApi.Controllers
         /// </summary>
         /// <returns>array of transactions</returns>
         [HttpGet]
-        [Route("api/[controller]/expenses")]
+        [Route("expenses")]
         public IEnumerable<TransactionVM> GetExpenses()
         {
             var transactions = _transactionRepository.GetExpenses();
@@ -67,7 +66,7 @@ namespace MoneyManagerApi.Controllers
         /// </summary>
         /// <returns>one transaction</returns>
         [HttpGet]
-        [Route("api/[controller]/{id}")]
+        [Route("{id}")]
         public TransactionVM GetTransactionById(int id)
         {
             var transaction = _transactionRepository.GetById(id);
@@ -80,7 +79,7 @@ namespace MoneyManagerApi.Controllers
         /// </summary>
         /// <returns>one transaction</returns>
         [HttpGet]
-        [Route("api/[controller]/name/{name}")]
+        [Route("name/{name}")]
         public TransactionVM GetTransactionByName(string name)
         {
             var transaction = _transactionRepository.GetByName(name);
@@ -93,7 +92,7 @@ namespace MoneyManagerApi.Controllers
         /// </summary>
         /// <returns>an array of transactions</returns>
         [HttpGet]
-        [Route("api/[controller]/type/{type}")]
+        [Route("type/{type}")]
         public IEnumerable<TransactionVM> GetTransactionByFrequency(Frequency type)
         {
             var transactions = _transactionRepository.GetByType(type);
@@ -105,7 +104,6 @@ namespace MoneyManagerApi.Controllers
         /// </summary>
         /// <param name="transactionDto">the new transaction</param>
         [HttpPost]
-        [Route("api/[controller]/")]
         public ActionResult<TransactionVM> CreateTransaction(TransactionDto transactionDto)
         {
             var transaction = _transactionMapper.Map(transactionDto);
@@ -121,7 +119,7 @@ namespace MoneyManagerApi.Controllers
         /// <param name="id">id of the transaction to be modified</param>
         /// <param name="amount">the modified transaction</param>
         [HttpPatch]
-        [Route("api/[controller]/{id}")]
+        [Route("{id}")]
         public ActionResult<TransactionVM> UpdateAmountTransaction(int id, decimal amount)
         {
             var currentTransaction = _transactionRepository.GetById(id);
@@ -140,7 +138,7 @@ namespace MoneyManagerApi.Controllers
         /// </summary>
         /// <param name="id">the id of the transaction to be deleted</param>
         [HttpDelete]
-        [Route("api/[controller]/{id}")]
+        [Route("{id}")]
         public IActionResult DeleteTransaction(int id)
         {
             var transaction = _transactionRepository.GetById(id);

@@ -30,6 +30,11 @@ namespace MoneyManagerApi.Controllers
             _appSettings = appSettings.Value;
         }
 
+        // POST : api/Users/authenticate
+        /// <summary>
+        /// Authorize an user
+        /// </summary>
+        /// <returns>a bearer token</returns>
         [AllowAnonymous]
         [HttpPost("authenticate")]
         public IActionResult Authenticate([FromBody]UserDto userDto)
@@ -64,6 +69,10 @@ namespace MoneyManagerApi.Controllers
             });
         }
 
+        // POST : api/Users/register
+        /// <summary>
+        /// Register an user
+        /// </summary>
         [AllowAnonymous]
         [HttpPost("register")]
         public IActionResult Register([FromBody]UserDto userDto)
@@ -84,6 +93,11 @@ namespace MoneyManagerApi.Controllers
             }
         }
 
+        // GET: api/Users/
+        /// <summary>
+        /// get all users
+        /// </summary>
+        /// <returns>all the users</returns>
         [HttpGet]
         public IActionResult GetAll()
         {
@@ -91,7 +105,11 @@ namespace MoneyManagerApi.Controllers
             var userDtos = _mapper.Map<IList<UserDto>>(users);
             return Ok(userDtos);
         }
-
+        // GET: api/Users/
+        /// <summary>
+        /// get user by id
+        /// </summary>
+        /// <returns>all the users</returns>
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
@@ -99,6 +117,11 @@ namespace MoneyManagerApi.Controllers
             var userDto = _mapper.Map<UserDto>(user);
             return Ok(userDto);
         }
+        // PUT : api/Users/1
+        /// <summary>
+        /// updates an user
+        /// </summary>
+        /// <returns>status of action</returns>
 
         [HttpPut("{id}")]
         public IActionResult Update(int id, [FromBody]UserDto userDto)
@@ -119,7 +142,11 @@ namespace MoneyManagerApi.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
-
+        // DELETE : api/User/1
+        /// <summary>
+        /// deletes a specific user
+        /// </summary>
+        /// <returns>status of action</returns>
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
