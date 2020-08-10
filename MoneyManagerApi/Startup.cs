@@ -41,7 +41,7 @@ namespace MoneyManagerApi
             services.AddDbContext<DataContext>(opt =>
                 opt.UseSqlServer(Configuration.GetConnectionString("TransactionContext")));
 
-            services.AddScoped<IUserService, UserService>();
+            
             services.AddScoped<DataInitializer>();
             services.AddScoped<ITransactionRepository, TransactionRepository>();
             services.AddScoped<TransactionMapper>();
@@ -65,6 +65,7 @@ namespace MoneyManagerApi
             services.AddCors(options => options.AddPolicy("AllowAllOrigins", builder => builder.AllowAnyOrigin()));
             
             var appSettingsSection = Configuration.GetSection("AppSettings");
+            services.Configure<AppSettings>(appSettingsSection);
 
             var appSettings = appSettingsSection.Get<AppSettings>();
             var key = Encoding.ASCII.GetBytes(appSettings.Secret);
@@ -101,6 +102,7 @@ namespace MoneyManagerApi
                 };
             });
 
+            services.AddScoped<IUserService, UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
