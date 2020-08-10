@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MoneyManagerApi.Data.Repositories.Contracts;
 using MoneyManagerApi.DTOs;
@@ -8,6 +9,7 @@ using MoneyManagerApi.ViewModels;
 
 namespace MoneyManagerApi.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class TransactionController : ControllerBase
