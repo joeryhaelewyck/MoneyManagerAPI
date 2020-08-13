@@ -59,14 +59,7 @@ namespace MoneyManagerApi.Controllers
             var tokenString = tokenHandler.WriteToken(token);
 
             // return basic user info (without password) and token to store client side
-            return Ok(new
-            {
-                Id = user.Id,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Email = user.Email,
-                Token = tokenString
-            });
+            return Ok(tokenString);
         }
 
         // POST : api/Users/register
