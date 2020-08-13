@@ -93,6 +93,19 @@ namespace MoneyManagerApi.Controllers
             }
         }
 
+        // GET: api/Users/checkusername
+        /// <summary>
+        /// check if an username is free
+        /// </summary>
+        /// <returns>false when username is taken, true when username is free</returns>
+        [AllowAnonymous]
+        [HttpGet("checkusername")]
+        public Boolean CheckAvailbleUsername(string username)
+        {
+            var user = _userService.GetbyName(username);
+            return user == null;
+        }
+
         // GET: api/Users/
         /// <summary>
         /// get all users

@@ -44,7 +44,10 @@ namespace MoneyManagerApi.Services
         {
             return _context.Users.Find(id);
         }
-
+        public User GetbyName(string name)
+        {
+            return _context.Users.SingleOrDefault(c => c.Username == name); 
+        }
         public User Create(User user, string password)
         {
             // validation
@@ -141,5 +144,7 @@ namespace MoneyManagerApi.Services
 
             return true;
         }
+
+        
     }
 }
