@@ -39,10 +39,10 @@ namespace MoneyManagerApi.Controllers
         [HttpPost("authenticate")]
         public IActionResult Authenticate([FromBody]LoginDto loginDto)
         {
-            var user = _userService.Authenticate(loginDto.Username, loginDto.Password);
+            var user = _userService.Authenticate(loginDto.Email, loginDto.Password);
 
             if (user == null)
-                return BadRequest(new { message = "Username or password is incorrect" });
+                return BadRequest(new { message = "Email or password is incorrect" });
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
@@ -62,9 +62,9 @@ namespace MoneyManagerApi.Controllers
             return Ok(new
             {
                 Id = user.Id,
-                Username = user.Username,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
+                Email = user.Email,
                 Token = tokenString
             });
         }
@@ -95,14 +95,14 @@ namespace MoneyManagerApi.Controllers
 
         // GET: api/Users/checkusername
         /// <summary>
-        /// check if an username is free
+        /// check if an username/email is free
         /// </summary>
         /// <returns>false when username is taken, true when username is free</returns>
         [AllowAnonymous]
         [HttpGet("checkusername")]
-        public Boolean CheckAvailbleUsername(string username)
+        public Boolean CheckAvailbleUsername(string email)
         {
-            var user = _userService.GetbyName(username);
+            var user = _userService.GetbyName(email);
             return user == null;
         }
 

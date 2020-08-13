@@ -5,7 +5,7 @@ namespace MoneyManagerApi.Services.Contracts
 {
     public interface IUserService
     {
-        User Authenticate(string username, string password);
+        User Authenticate(string mail, string password);
         IEnumerable<User> GetAll();
         User GetById(int id);
         User GetbyName(string name);
