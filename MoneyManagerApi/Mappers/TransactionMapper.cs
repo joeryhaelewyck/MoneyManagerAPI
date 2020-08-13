@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 using MoneyManagerApi.DTOs;
 using MoneyManagerApi.Models;
 using MoneyManagerApi.ViewModels;

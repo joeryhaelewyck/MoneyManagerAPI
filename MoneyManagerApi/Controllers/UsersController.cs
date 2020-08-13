@@ -37,9 +37,9 @@ namespace MoneyManagerApi.Controllers
         /// <returns>a bearer token</returns>
         [AllowAnonymous]
         [HttpPost("authenticate")]
-        public IActionResult Authenticate([FromBody]UserDto userDto)
+        public IActionResult Authenticate([FromBody]LoginDto loginDto)
         {
-            var user = _userService.Authenticate(userDto.Username, userDto.Password);
+            var user = _userService.Authenticate(loginDto.Username, loginDto.Password);
 
             if (user == null)
                 return BadRequest(new { message = "Username or password is incorrect" });

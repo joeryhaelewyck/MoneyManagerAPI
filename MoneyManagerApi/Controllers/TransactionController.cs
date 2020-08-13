@@ -9,7 +9,6 @@ using MoneyManagerApi.ViewModels;
 
 namespace MoneyManagerApi.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class TransactionController : ControllerBase

@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MoneyManagerApi.Data.Repositories.Contracts;
-using MoneyManagerApi.DTOs;
 using MoneyManagerApi.Models;
 using System.Collections.Generic;
 using System.Linq;
