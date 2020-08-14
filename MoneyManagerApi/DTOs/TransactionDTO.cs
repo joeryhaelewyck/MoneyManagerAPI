@@ -9,7 +9,7 @@ namespace MoneyManagerApi.DTOs
         [Required]
         public string Name { get; set; }
         [Required]
-        public Frequency TransactionFrequency { get; set; }
+        public TypeTransaction Type { get; set; }
         [Required]
         public decimal Amount { get; set; }
         public DateTime TransactionDateTime { get; set; }

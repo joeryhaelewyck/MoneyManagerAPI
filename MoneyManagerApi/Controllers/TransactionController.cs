@@ -87,12 +87,12 @@ namespace MoneyManagerApi.Controllers
 
         // GET: api/Transactions/type/1
         /// <summary>
-        /// Get all the transaction of a certain frequency
+        /// Get all the transaction of a certain type
         /// </summary>
         /// <returns>an array of transactions</returns>
         [HttpGet]
         [Route("type/{type}")]
-        public IEnumerable<TransactionVM> GetTransactionByFrequency(Frequency type)
+        public IEnumerable<TransactionVM> GetTransactionByType(TypeTransaction type)
         {
             var transactions = _transactionRepository.GetByType(type);
             return _transactionMapper.MapList(transactions);

@@ -50,9 +50,9 @@ namespace MoneyManagerApi.Data.Repositories
             return _transactions.SingleOrDefault(c => c.Name == name);
         }
 
-        public IEnumerable<Transaction> GetByType(Frequency frequency)
+        public IEnumerable<Transaction> GetByType(TypeTransaction type)
         {
-            return _transactions.Where(c => c.FrequencyTransaction == frequency);
+            return _transactions.Where(c => c.Type == type);
         }
 
         public void SaveChanges()

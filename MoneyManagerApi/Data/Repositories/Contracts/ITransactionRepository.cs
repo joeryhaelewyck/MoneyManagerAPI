@@ -8,7 +8,7 @@ namespace MoneyManagerApi.Data.Repositories.Contracts
     {
         Transaction GetById(int id);
         Transaction GetByName(string name);
-        IEnumerable<Transaction> GetByType(Frequency type);
+        IEnumerable<Transaction> GetByType(TypeTransaction type);
         IEnumerable<Transaction> GetAll();
         IEnumerable<Transaction> GetEarnings();
         IEnumerable<Transaction> GetExpenses();

@@ -15,7 +15,7 @@ namespace MoneyManagerApi.Mappers
             {
                 Name = transactionDto.Name,
                 Amount = transactionDto.Amount,
-                FrequencyTransaction = transactionDto.TransactionFrequency,
+                Type = transactionDto.Type,
                 TransactionDateTime = transactionDto.TransactionDateTime
             };
         }
@@ -27,7 +27,7 @@ namespace MoneyManagerApi.Mappers
                 Id = transaction.Id,
                 Name = transaction.Name,
                 Amount = transaction.Amount,
-                Frequency = transaction.FrequencyTransaction.ToString()
+                Type = transaction.Type.ToString()
             };
         }
 

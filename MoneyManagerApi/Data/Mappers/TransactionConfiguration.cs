@@ -14,7 +14,7 @@ namespace MoneyManagerApi.Data.Mappers
             builder.HasKey(T => T.Id);
             //Properties
             builder.Property(T => T.Name).HasColumnName("NAME").IsRequired();
-            builder.Property(T => T.FrequencyTransaction).HasColumnName("FREQUENCY").IsRequired();
+            builder.Property(T => T.Type).HasColumnName("TYPE").IsRequired();
             builder.Property(T => T.Amount).HasColumnName("AMOUNT").IsRequired();
             builder.Property(T => T.TransactionDateTime).HasColumnName("DATE").IsRequired();
         }
